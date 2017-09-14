@@ -101,7 +101,7 @@ def webhook():
 		if i == len(words) - 2:
 			print(words[i])
 			print(words[i+1])
-			if words[i].lower() == 'poop' and words[i+1].lower == 'is':
+			if words[i].lower() == 'poop' and words[i+1].lower() == 'is':
 				reply("BROWN!")
 
 	if 'fucking' in textNoPunc.lower() != -1:
