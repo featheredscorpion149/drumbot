@@ -55,7 +55,7 @@ def webhook():
 	elif 'lapping up the high high' in textNoPunc.lower() != -1:
 		reply('BALLS BALLS BALLS BALLS')
 
-	elif 'well all have' in textNoPunc.lower() != -1 or 'well all get' in textNoPunc.lower() != -1::
+	elif 'well all have' in textNoPunc.lower() != -1 or 'well all get' in textNoPunc.lower() != -1:
 		reply('DRINKS!')
 
 	elif 'at theodore' in textNoPunc.lower() != -1:
