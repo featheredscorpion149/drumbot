@@ -49,6 +49,24 @@ def webhook():
 		reply('HOO!')
 		reply('...you was right')
 
+	elif 'remember me to teefy crane' in textNoPunc.lower() != -1:
+		reply('THAT BITCH!')
+
+	elif 'lapping up the high high' in textNoPunc.lower() != -1:
+		reply('BALLS BALLS BALLS BALLS')
+
+	elif 'well all have' in textNoPunc.lower() != -1 or 'well all get' in textNoPunc.lower() != -1::
+		reply('DRINKS!')
+
+	elif 'at theodore' in textNoPunc.lower() != -1:
+		reply('ZINK\'S!')
+
+	elif 'penn' in textNoPunc.lower() != -1:
+		reply('SUCKS!')
+
+	elif 'harvard' in textNoPunc.lower() != -1:
+		reply('*Hahvahd')
+
 	elif 'aw yeah' in textNoPunc.lower() != -1:
 		reply('BIG BOOTY!')
 
@@ -77,7 +95,17 @@ def webhook():
 		if words[i].lower() == 'big' and i == len(words) - 1:
 			reply("...BOOTY!")
 
-	if 'fuck' in textNoPunc.lower() != -1:
+		if i == len(words) - 2:
+			if words[i].lower() == 'poop' and words[i+1].lower == 'is':
+				reply("BROWN!")
+
+	if 'fucking' in textNoPunc.lower() != -1:
+		reply('*Fkng')
+	elif 'fucked' in textNoPunc.lower() != -1:
+		reply('*Fkd')
+	elif 'fucker' in textNoPunc.lower() != -1:
+		reply('*Fkr')
+	elif 'fuck' in textNoPunc.lower() != -1:
 		reply('*Fk')
 
 	return "ok", 200
