@@ -52,6 +52,9 @@ def webhook():
 	elif 'remember me to teefy crane' in textNoPunc.lower() != -1:
 		reply('THAT BITCH!')
 
+	elif 'tell them just how i' in textNoPunc.lower() != -1:
+		reply('HUH!')
+
 	elif 'lapping up the high high' in textNoPunc.lower() != -1:
 		reply('BALLS BALLS BALLS BALLS')
 
@@ -96,6 +99,8 @@ def webhook():
 			reply("...BOOTY!")
 
 		if i == len(words) - 2:
+			print(words[i])
+			print(words[i+1])
 			if words[i].lower() == 'poop' and words[i+1].lower == 'is':
 				reply("BROWN!")
 
