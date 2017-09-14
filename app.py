@@ -9,7 +9,7 @@ from urllib.request import Request, urlopen
 from flask import Flask, request
 
 app = Flask(__name__)
-bot_id = "REPLACE THIS WITH YOUR BOT ID ONCE BOT IS ADDED TO THE CHAT"
+bot_id = "d38b2db8ef13f4f6e57b1c2d7c"
 
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
@@ -18,7 +18,66 @@ def webhook():
 	# 'message' is an object that represents a single GroupMe message.
 	message = request.get_json()
 
-	# TODO: Your bot's logic here
+	translator = str.maketrans('', '', string.punctuation)
+	text = message['text']
+	textNoPunc = text.translate(translator)
+
+	words = textNoPunc.split()
+
+	if sender_is_bot(message):
+		return "ok", 200
+
+	if text == 'testing drumbot':
+		reply('1,2,3')
+
+	elif text == '@Drumbot':
+		reply('...I am listening')
+
+	elif 'sniped' in textNoPunc.lower() != -1:
+		reply('Gottem')
+
+	elif 'shh' in textNoPunc.lower() != -1:
+		reply('BITCH YOU GUESSED IT!')
+		reply('HOO!')
+		reply('...you was right')
+
+	elif 'its 1024' in textNoPunc.lower() != -1:
+		reply('GET LIT!!!')
+
+	elif 'you guessed it' in textNoPunc.lower() != -1:
+		reply('HOO!')
+		reply('...you was right')
+
+	elif 'aw yeah' in textNoPunc.lower() != -1:
+		reply('BIG BOOTY!')
+
+	elif 'litty titty' in textNoPunc.lower() != -1:
+		reply('...tiiiiitttyyy liiiiitttyyyyyy...')
+
+	elif 'theo' in textNoPunc.lower() != -1:
+		reply('Theo\'s here! I\'m sober!')
+
+	elif 'bitch' in textNoPunc.lower() != -1:
+		reply('YOU GUESSED IT!')
+		reply('HOO!')
+		reply('...you was right')
+
+	elif 'many' in textNoPunc.lower() != -1 and 'brick' in textNoPunc.lower() != -1:
+		reply('Twelve Bricks')
+		reply('(Sheesh! Damn!)')
+
+	elif 'found twelve bricks' in textNoPunc.lower() != -1 or 'found 12 bricks' in textNoPunc.lower() != -1:
+		reply('sheesh! damn!')
+
+	elif 'trust me' in textNoPunc.lower() != -1:
+		reply('...truss me daddy!')
+
+	for i in range(len(words)):
+		if words[i].lower() == 'big' and i == len(words) - 1:
+			reply("...BOOTY!")
+
+	if 'fuck' in textNoPunc.lower() != -1:
+		reply('*Fk')
 
 	return "ok", 200
 
