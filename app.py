@@ -10,7 +10,7 @@ from urllib.request import Request, urlopen
 from flask import Flask, request
 
 app = Flask(__name__)
-bot_id = "d38b2db8ef13f4f6e57b1c2d7c"
+bot_id = "11562ca58f79256ffd68de861f"
 
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
@@ -28,8 +28,12 @@ def webhook():
 	if sender_is_bot(message):
 		return "ok", 200
 
+
 	if text == 'testing drumbot':
 		reply('1,2,3')
+
+	if text == 'spicy bus ten hut':
+		reply('FUCK YOU!')
 
 	elif text == '@Drumbot':
 		reply('...I am listening')
@@ -42,7 +46,7 @@ def webhook():
 		reply('HOO!')
 		reply('...you was right')
 
-	elif 'its 1024' in textNoPunc.lower() != -1:
+	elif '1024' in textNoPunc.lower() != -1:
 		reply('GET LIT!!!')
 
 	elif 'you guessed it' in textNoPunc.lower() != -1:
@@ -76,13 +80,8 @@ def webhook():
 	elif 'litty titty' in textNoPunc.lower() != -1:
 		reply('...tiiiiitttyyy liiiiitttyyyyyy...')
 
-	elif 'theo' in textNoPunc.lower() != -1:
+	elif 'its theo' in textNoPunc.lower() != -1 or 'theos here' in textNoPunc.lower() != -1:
 		reply('Theo\'s here! I\'m sober!')
-
-	elif 'bitch' in textNoPunc.lower() != -1:
-		reply('YOU GUESSED IT!')
-		reply('HOO!')
-		reply('...you was right')
 
 	elif 'many' in textNoPunc.lower() != -1 and 'brick' in textNoPunc.lower() != -1:
 		reply('Twelve Bricks')
@@ -93,26 +92,45 @@ def webhook():
 
 	elif 'trust me' in textNoPunc.lower() != -1:
 		reply('...truss me daddy!')
+	
+	elif 'we are percussion' in textNoPunc.lower() != -1:
+		reply('FUCK YOU!')
 
 	for i in range(len(words)):
-		if words[i].lower() == 'big' and i == len(words) - 1:
-			reply("...BOOTY!")
+		if i == len(words) - 1:
+			if words[i].lower() == 'big':
+				reply("...BOOTY!")
+
+			if words[i].lower() == 'bees':
+				reply("...are dying at an alarming rate. :(")
+
+			if words[i].lower() == 'bitch':
+				reply('YOU GUESSED IT!')
+				reply('HOO!')
+				reply('...you was right')
+
+		if i == len(words) - 4:
+			if words[i].lower() == 'dut' and words[i+1].lower() == 'dut' and words[i+2].lower() == 'dut' and words[i+3].lower() == 'dut':
+				reply("BOI!")
 
 		if i == len(words) - 2:
-			print(words[i])
-			print(words[i+1])
 			if words[i].lower() == 'poop' and words[i+1].lower() == 'is':
 				reply("BROWN!")
 
+			if words[i].lower() == 'go' and words[i+1].lower() == 'red':
+				reply("dammit!")
+
+			if words[i].lower() == 'click' and words[i+1].lower() == 'click':
+				reply("Click.")
+
 	if 'fucking' in textNoPunc.lower() != -1:
-		reply('*Fkng')
+		reply('*Fkin')
 	elif 'fucked' in textNoPunc.lower() != -1:
-		reply('*Fkd')
+		reply('*Fked')
 	elif 'fucker' in textNoPunc.lower() != -1:
-		reply('*Fkr')
+		reply('*Fker')
 	elif 'fuck' in textNoPunc.lower() != -1:
 		reply('*Fk')
-
 	return "ok", 200
 
 ################################################################################
