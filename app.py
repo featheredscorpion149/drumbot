@@ -28,10 +28,6 @@ def webhook():
 	if sender_is_bot(message):
 		return "ok", 200
 
-
-	if text == 'testing drumbot':
-		reply('1,2,3')
-
 	if text == 'spicy bus ten hut':
 		reply('FUCK YOU!')
 
