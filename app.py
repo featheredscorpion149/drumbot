@@ -10,7 +10,7 @@ from urllib.request import Request, urlopen
 from flask import Flask, request
 
 app = Flask(__name__)
-bot_id = "11562ca58f79256ffd68de861f"
+bot_id = "d38b2db8ef13f4f6e57b1c2d7c"
 
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
