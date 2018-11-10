@@ -12,7 +12,7 @@ from flask import Flask, request
 from responses import get_response
 
 app = Flask(__name__)
-bot_id = "d38b2db8ef13f4f6e57b1c2d7c"
+bot_id = "d98e5d3da0a990b2934d0b6114"
 
 # Called whenever the app's callback URL receives a POST request
 # That'll happen every time a message is sent in the group
