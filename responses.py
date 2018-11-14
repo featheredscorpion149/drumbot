@@ -7,6 +7,7 @@
 import os
 import json
 import string
+import random
 from enum import Enum
 
 class Condition(Enum):
@@ -45,6 +46,38 @@ class Response:
         def reply(self):
                 return self.response
 
+class RandomResponse:
+        def __init__(self, trigger, prepend, responseList, conditions=Condition.CONTAINS):
+                self.triggers = trigger
+                self.prepend = prepend
+                self.responseList = responseList
+                self.conditions = conditions
+        def check(self, text, textNoPunc, words):
+                if self.conditions == Condition.AND:
+                        for t in self.triggers:
+                                if textNoPunc.lower().find(t) == -1:
+                                        return False
+                        return True
+
+                else:
+                        for t in self.triggers:
+                                if self.conditions == Condition.EXACT:
+                                        if text == t:
+                                                return True
+                                elif self.conditions == Condition.CONTAINS:
+                                        if (t in textNoPunc.lower() != -1):
+                                                return True
+                                elif self.conditions == Condition.END:
+                                        lower = textNoPunc.lower().strip()
+                                        index = lower.find(t)
+                                        if index != -1 and index == len(lower) - len(t):
+                                                return True
+
+                return False
+        def reply(self):
+                r = random.randint(0, len(self.responseList) - 1)
+                return [self.prepend + " " + self.responseList[r]]
+
 responses = [
         Response(["barbeque bus ten hut"], ["FUCK YOU"], Condition.CONTAINS),
         Response(["@Drumbot"], ["...I am listening"], Condition.EXACT),
@@ -65,7 +98,7 @@ responses = [
         Response(["harvard"], ["*Hahvahd"], Condition.CONTAINS),
         Response(["aw yeah"], ["BIG BOOTY!"], Condition.CONTAINS),
         Response(["litty titty"], ["...tiiiiitttyyy liiiiitttyyyyyy..."], Condition.CONTAINS),
-        Response(["its theo", "theos here"], ["Theo\'s here!", "I\'m sober!"], Condition.CONTAINS),
+        Response(["its theo", "theos here"], ["I\'m sober!"], Condition.CONTAINS),
         Response(["trust me"], ["...truss me daddy!"], Condition.CONTAINS),
         Response(["we are percussion"], ["FUCK YOU!"], Condition.CONTAINS),
         Response(["dont be that guy"], ["BE THAT GUY!"], Condition.CONTAINS),
@@ -85,11 +118,28 @@ responses = [
         Response(["masturbate", "jack off", "masturbation", "jacking off"], ["That's a Band-Sanctioned event!"]),
         ]
 
+ezra_responses = [
+        Response(["institution", "motto"], ["I would found an institution where any person can find instruction in any study!"], Condition.CONTAINS),
+        Response(["cornell", "ezra"], ["...you rang?"], Condition.CONTAINS),
+        Response(["ithaca"], ["Sounds like a great place for a university."], Condition.CONTAINS),
+        Response(["far above", "cayuga"], ["Ah yes, a majestic view."], Condition.AND),
+        Response(["cayuga"], ["Man I love being far above that lake."], Condition.CONTAINS),
+        Response(["cold", "freezing"], ["Ha! Y'all are weak!"], Condition.CONTAINS),
+        Response(["slope", "hill"], ["In my day we walked up the slope BOTH WAYS."], Condition.CONTAINS),
+]
+
+oja_hazing = [
+        "Of course it is! Please turn yourself in immediately.",
+        "Hmmm... probably not, but we'll still JA you for it.",
+        "Nah, that's fine. As long as you don't get caught..."
+]
+
 oja_responses = [
-        Response(["t-pose"], ["Please do not haze the OJA."], Condition.AND),
-        Response(["is", "hazing"], ["The OJA says: of course it is! Please turn yourself in immediately."], Condition.AND),
+        Response(["tpose"], ["Please do not haze the OJA."], Condition.AND),
         Response(["is", "a band event"], ["The OJA says: only if you're doing something bad."], Condition.AND),
         Response(["help"], ["The OJA isn't actually here to help you, sorry."]),
+
+        RandomResponse(["is", "hazing"], "The OJA says:", oja_hazing, Condition.AND),
 
         Response([""], ["The OJA doesn't understand the question, but is still offended."]),
 ]
@@ -99,6 +149,10 @@ def get_response(message):
         translator = str.maketrans('', '', string.punctuation)
         textNoPunc = text.translate(translator)
         words = textNoPunc.split()
+
+        for r in ezra_responses:
+                if r.check(text, textNoPunc, words):
+                        return r.reply()
 
         for r in responses:
                 if r.check(text, textNoPunc, words):
