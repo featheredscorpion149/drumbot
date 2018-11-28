@@ -101,6 +101,7 @@ responses = [
         Response(["its theo", "theos here"], ["I\'m sober!"], Condition.CONTAINS),
         Response(["trust me"], ["...truss me daddy!"], Condition.CONTAINS),
         Response(["we are percussion"], ["FUCK YOU!"], Condition.CONTAINS),
+        Response(["fuck em up", "fuck um up", "fuck them up"], ["GO C U"], Condition.CONTAINS),
         Response(["dont be that guy"], ["BE THAT GUY!"], Condition.CONTAINS),
         Response(["if its brown"], ["FUCK YOU!"], Condition.CONTAINS),
 
@@ -125,18 +126,20 @@ ezra_responses = [
         Response(["far above", "cayuga"], ["Ah yes, a majestic view."], Condition.AND),
         Response(["cayuga"], ["Man I love being far above that lake."], Condition.CONTAINS),
         Response(["cold", "freezing"], ["Ha! Y'all are weak!"], Condition.CONTAINS),
-        Response(["slope", "hill"], ["In my day we walked up the slope BOTH WAYS."], Condition.CONTAINS),
+        Response(["slope"], ["In my day we walked up the slope BOTH WAYS."], Condition.CONTAINS),
 ]
 
 oja_hazing = [
         "Of course it is! Please turn yourself in immediately.",
         "Hmmm... probably not, but we'll still JA you for it.",
+        "Anything fun is hazing.",
+        "We coooould suspend you for that, but instead we'll yell at you for an hour because we're nice :)",
         "Nah, that's fine. As long as you don't get caught..."
 ]
 
 oja_responses = [
         Response(["tpose"], ["Please do not haze the OJA."], Condition.AND),
-        Response(["is", "a band event"], ["The OJA says: only if you're doing something bad."], Condition.AND),
+        Response(["is", "band event"], ["The OJA says: only if you're doing something bad."], Condition.AND),
         Response(["help"], ["The OJA isn't actually here to help you, sorry."]),
 
         RandomResponse(["is", "hazing"], "The OJA says:", oja_hazing, Condition.AND),
