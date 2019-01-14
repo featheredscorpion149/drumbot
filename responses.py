@@ -117,6 +117,7 @@ responses = [
         Response(["alumni status"], ["Did you mean: Alex Wong?"]),
         Response(["barbeque sauce", "bbq sauce"], ["THAT\'S HAZING!", "@Martha_Pollack"]),
         Response(["masturbate", "jack off", "masturbation", "jacking off"], ["That's a Band-Sanctioned event!"]),
+        Response(["cold", "freezing"], ["Ha! Y'all are weak!"], Condition.CONTAINS),
         ]
 
 ezra_responses = [
@@ -125,7 +126,6 @@ ezra_responses = [
         Response(["ithaca"], ["Sounds like a great place for a university."], Condition.CONTAINS),
         Response(["far above", "cayuga"], ["Ah yes, a majestic view."], Condition.AND),
         Response(["cayuga"], ["Man I love being far above that lake."], Condition.CONTAINS),
-        Response(["cold", "freezing"], ["Ha! Y'all are weak!"], Condition.CONTAINS),
         Response(["slope"], ["In my day we walked up the slope BOTH WAYS."], Condition.CONTAINS),
 ]
 
@@ -153,9 +153,9 @@ def get_response(message):
         textNoPunc = text.translate(translator)
         words = textNoPunc.split()
 
-        for r in ezra_responses:
-                if r.check(text, textNoPunc, words):
-                        return r.reply()
+        #for r in ezra_responses:
+        #        if r.check(text, textNoPunc, words):
+        #                return r.reply()
 
         for r in responses:
                 if r.check(text, textNoPunc, words):
