@@ -17,7 +17,8 @@ class Condition(Enum):
         AND=4
 
 class Response:
-        def __init__(self, trigger, response, conditions=Condition.CONTAINS):
+        def __init__(self, trigger, response, conditions=Condition.CONTAINS, url=None):
+                self.url = url
                 self.triggers = trigger
                 self.response = response
                 self.conditions = conditions
@@ -44,7 +45,7 @@ class Response:
 
                 return False
         def reply(self):
-                return self.response
+                return self.response, self.url
 
 class RandomResponse:
         def __init__(self, trigger, prepend, responseList, conditions=Condition.CONTAINS):
@@ -76,10 +77,12 @@ class RandomResponse:
                 return False
         def reply(self):
                 r = random.randint(0, len(self.responseList) - 1)
-                return [self.prepend + " " + self.responseList[r]]
+                return [self.prepend + " " + self.responseList[r]], None
 
 responses = [
-        Response(["barbeque bus ten hut"], ["FUCK YOU"], Condition.CONTAINS),
+        Response(["that wasnt very cash money of you","thats not very cash money of you"], [], Condition.CONTAINS, "https://i.redd.it/7sut3n8k3w021.png"),
+
+        Response(["boondoggle bus ten hut"], ["FUCK YOU"], Condition.CONTAINS),
         Response(["@Drumbot"], ["...I am listening"], Condition.EXACT),
         Response(["sniped"], ["Gottem"], Condition.CONTAINS),
 
@@ -104,7 +107,7 @@ responses = [
         Response(["fuck em up", "fuck um up", "fuck them up"], ["GO C U"], Condition.CONTAINS),
         Response(["dont be that guy"], ["BE THAT GUY!"], Condition.CONTAINS),
         Response(["if its brown"], ["FUCK YOU!"], Condition.CONTAINS),
-
+        Response(["cold", "freezing"], ["Ha! Y'all are weak!"], Condition.CONTAINS),
 
         Response(["big"], ["...BOOTY!"], Condition.END),
         Response(["bees"], ["... are dying at an alarming rate. :("], Condition.END),
@@ -117,7 +120,6 @@ responses = [
         Response(["alumni status"], ["Did you mean: Alex Wong?"]),
         Response(["barbeque sauce", "bbq sauce"], ["THAT\'S HAZING!", "@Martha_Pollack"]),
         Response(["masturbate", "jack off", "masturbation", "jacking off"], ["That's a Band-Sanctioned event!"]),
-        Response(["cold", "freezing"], ["Ha! Y'all are weak!"], Condition.CONTAINS),
         ]
 
 ezra_responses = [
@@ -165,12 +167,15 @@ def get_response(message):
                 if text.find("@OJA") != -1 and r.check(text, textNoPunc, words):
                         return r.reply()
 
-        return []
+        return [], None
 
 if __name__ == "__main__":
         # 'message' is an object that represents a single GroupMe message.
         message = ''
         while True:
                 message = input("Enter message: ")
-                for t in get_response(message):
+                words, url = get_response(message)
+                for t in words:
                         print(t)
+                if url is not None:
+                        print("URL: " + url)
