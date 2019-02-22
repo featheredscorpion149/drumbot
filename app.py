@@ -30,11 +30,9 @@ def webhook():
         if sender_is_bot(message):
                 return "ok", 200
         else:
-                words, url = get_response(text)
+                words = get_response(text)
                 for t in words:
                         reply(t)
-                if url is not None:
-                        reply_with_image("", url)
 
         return "ok", 200
 

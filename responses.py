@@ -17,8 +17,7 @@ class Condition(Enum):
         AND=4
 
 class Response:
-        def __init__(self, trigger, response, conditions=Condition.CONTAINS, url=None):
-                self.url = url
+        def __init__(self, trigger, response, conditions=Condition.CONTAINS):
                 self.triggers = trigger
                 self.response = response
                 self.conditions = conditions
@@ -45,7 +44,7 @@ class Response:
 
                 return False
         def reply(self):
-                return self.response, self.url
+                return self.response
 
 class RandomResponse:
         def __init__(self, trigger, prepend, responseList, conditions=Condition.CONTAINS):
@@ -80,7 +79,6 @@ class RandomResponse:
                 return [self.prepend + " " + self.responseList[r]], None
 
 responses = [
-        Response(["that wasnt very cash money of you","thats not very cash money of you"], [], Condition.CONTAINS, "https://i.redd.it/7sut3n8k3w021.png"),
 
         Response(["boondoggle bus ten hut"], ["FUCK YOU"], Condition.CONTAINS),
         Response(["@Drumbot"], ["...I am listening"], Condition.EXACT),
@@ -104,9 +102,8 @@ responses = [
         Response(["its theo", "theos here"], ["I\'m sober!"], Condition.CONTAINS),
         Response(["trust me"], ["...truss me daddy!"], Condition.CONTAINS),
         Response(["we are percussion"], ["FUCK YOU!"], Condition.CONTAINS),
-        Response(["fuck em up", "fuck um up", "fuck them up"], ["GO C U"], Condition.CONTAINS),
+        Response(["fuck em up", "fuck um up", "fuck them up"], ["GO C U!"], Condition.CONTAINS),
         Response(["dont be that guy"], ["BE THAT GUY!"], Condition.CONTAINS),
-        Response(["if its brown"], ["FUCK YOU!"], Condition.CONTAINS),
         Response(["cold", "freezing"], ["Ha! Y'all are weak!"], Condition.CONTAINS),
 
         Response(["big"], ["...BOOTY!"], Condition.END),
@@ -114,6 +111,7 @@ responses = [
         Response(["dut dut dut dut"], ["BOI!"], Condition.END),
         Response(["poop is"], ["BROWN!"], Condition.END),
         Response(["brown is"], ["POOP!"], Condition.END),
+        Response(["if its brown"], ["flush it down"], Condition.END),
         Response(["go red"], ["dammit!"], Condition.END),
         Response(["click click"], ["CLICK."], Condition.END),
 
@@ -149,6 +147,14 @@ oja_responses = [
         Response([""], ["The OJA doesn't understand the question, but is still offended."]),
 ]
 
+meme_responses = [
+        Response(["that wasnt very cash money of you","thats not very cash money of you"], ["https://i.redd.it/7sut3n8k3w021.png"], Condition.CONTAINS),
+        Response(["wack"], ["https://i.groupme.com/480x361.gif.2a7813806bae4dea8860208409cc5a74.large"], Condition.CONTAINS),
+        Response(["wha"], ["https://i.kym-cdn.com/entries/icons/facebook/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.jpg"], Condition.CONTAINS),
+        Response(["sign", "road"], ["https://i.groupme.com/480x351.gif.31a7339cfb0a46768aa9bc76ebff4b0d.large"], Condition.AND),
+        Response(["brrrap", "brrap", "brap"], ["https://i.groupme.com/600x446.jpeg.a71923d48c17430d9e68fad1f1d5bac1.large"], Condition.CONTAINS),
+]
+
 def get_response(message):
         text = message
         translator = str.maketrans('', '', string.punctuation)
@@ -163,6 +169,10 @@ def get_response(message):
                 if r.check(text, textNoPunc, words):
                         return r.reply()
 
+        for r in meme_responses:
+                if r.check(text, textNoPunc, words):
+                        return r.reply()
+
         for r in oja_responses:
                 if text.find("@OJA") != -1 and r.check(text, textNoPunc, words):
                         return r.reply()
@@ -174,8 +184,6 @@ if __name__ == "__main__":
         message = ''
         while True:
                 message = input("Enter message: ")
-                words, url = get_response(message)
+                words = get_response(message)
                 for t in words:
                         print(t)
-                if url is not None:
-                        print("URL: " + url)
