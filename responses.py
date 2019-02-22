@@ -150,7 +150,7 @@ oja_responses = [
 meme_responses = [
         Response(["that wasnt very cash money of you","thats not very cash money of you"], ["https://i.redd.it/7sut3n8k3w021.png"], Condition.CONTAINS),
         Response(["wack"], ["https://i.groupme.com/480x361.gif.2a7813806bae4dea8860208409cc5a74.large"], Condition.CONTAINS),
-        Response(["wha"], ["https://i.kym-cdn.com/entries/icons/facebook/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.jpg"], Condition.CONTAINS),
+        Response(["wha"], ["https://i.kym-cdn.com/entries/icons/facebook/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.jpg"], Condition.EXACT),
         Response(["sign", "road"], ["https://i.groupme.com/480x351.gif.31a7339cfb0a46768aa9bc76ebff4b0d.large"], Condition.AND),
         Response(["brrrap", "brrap", "brap"], ["https://i.groupme.com/600x446.jpeg.a71923d48c17430d9e68fad1f1d5bac1.large"], Condition.CONTAINS),
 ]
