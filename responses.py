@@ -177,7 +177,7 @@ def get_response(message):
                 if text.find("@OJA") != -1 and r.check(text, textNoPunc, words):
                         return r.reply()
 
-        return [], None
+        return []
 
 if __name__ == "__main__":
         # 'message' is an object that represents a single GroupMe message.
