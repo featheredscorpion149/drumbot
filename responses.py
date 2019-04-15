@@ -107,6 +107,7 @@ responses = [
         Response(["cold", "freezing"], ["Ha! Y'all are weak!"], Condition.CONTAINS),
 
         Response(["big"], ["...BOOTY!"], Condition.END),
+        Response(["bees go"], ["BUZZ!"], Condition.END),
         Response(["bees"], ["... are dying at an alarming rate. :("], Condition.END),
         Response(["dut dut dut dut"], ["BOI!"], Condition.END),
         Response(["poop is"], ["BROWN!"], Condition.END),
@@ -118,6 +119,10 @@ responses = [
         Response(["alumni status"], ["Did you mean: Alex Wong?"]),
         Response(["barbeque sauce", "bbq sauce"], ["THAT\'S HAZING!", "@Martha_Pollack"]),
         Response(["masturbate", "jack off", "masturbation", "jacking off"], ["That's a Band-Sanctioned event!"]),
+
+        Response(["threesome"], ["NO! NO SEX! NO PENIS! NO VAGINA! NO BOOBIES! JUST ICE!"], Condition.CONTAINS),
+        Response(["lake conference"], ["Grab a drink and tune in to Channel 3!"], Condition.CONTAINS),
+        Response(["rage cage", "sandbag"], ["SANDBAG JULIE! SANDBAG JULIE!"], Condition.CONTAINS),
         ]
 
 ezra_responses = [
