@@ -42,7 +42,8 @@ This bot boilerplate is written in Python 3, and is designed to be deployed on H
 
 		- I've found `heroku logs -t` to be more useful. It will pull up the past hundred lines, but then it will show new log messages in real time.
 
-10. ***Only do this when you're sure your bot is [ready to go live](https://i.memecaptain.com/gend_images/Zi5JCA.jpg) so you don't annoy those in the groupchat with your testing. Instead of testing with `reply()`, test by `print()`-ing to the Heroku logs.*** To add your bot to a GroupMe groupchat...
+10. ***Only do this when you're sure your bot is [ready to go live](https://i.memecaptain.com/gend_images/Zi5JCA.jpg) so you don't annoy those in the groupchat with your testing. Instead of testing with `reply()`, test by `print()`-ing to the Heroku logs OR by entering phrases into responses.py.
+*** To add your bot to a GroupMe groupchat...
 
 	1. Go to [dev.groupme.com/bots](https://dev.groupme.com/bots) and click 'Create bot'.
 
@@ -81,6 +82,11 @@ The bot code itself. With `app = Flask(__name__)`, a Flask application is create
 This means the following function, `webhook()`, will be called every time the homepage of the callback site receives a `POST` request. Because of this, you can think of `webhook()` as the bot's main method whenever it receives any message.
 
 The other functions, which follow the line of pound signs, are just there to make common tasks simpler.
+
+#### `responses.py`
+
+The responses and their trigger phrases. Add or edit your responses here. You can also run 
+./responses.py from the command line to test your responses!
 
 ## GroupMe API
 
